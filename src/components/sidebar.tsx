@@ -2,6 +2,7 @@
 import { Fragment, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { SignOutButton, UserButton } from "@clerk/nextjs";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
@@ -17,6 +18,7 @@ import {
   CheckBadgeIcon,
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { Button } from "./ui/button";
 import SearchModal from "../components/search-modal";
 
 const navigation = [
@@ -293,7 +295,7 @@ export default function Sidebar({ children }) {
                 />
 
                 {/* Profile dropdown */}
-                <Menu as="div" className="relative">
+                {/* <Menu as="div" className="relative">
                   <Menu.Button className="-m-1.5 flex items-center p-1.5">
                     <span className="sr-only">Open user menu</span>
                     <Image
@@ -343,7 +345,8 @@ export default function Sidebar({ children }) {
                       ))}
                     </Menu.Items>
                   </Transition>
-                </Menu>
+                </Menu> */}
+                <UserButton />
               </div>
             </div>
           </div>
