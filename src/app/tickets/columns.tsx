@@ -1,6 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
+import { ApproveDialog } from "./approve-dialog";
 
 export type Ticket = {
   id: number;
@@ -22,6 +23,10 @@ export const columns: ColumnDef<Ticket>[] = [
   {
     header: "Description",
     accessorKey: "description",
+  },
+  {
+    header: "Approval",
+    accessorKey: "approved",
   },
   {
     header: "Customer Name",
@@ -54,6 +59,14 @@ export const columns: ColumnDef<Ticket>[] = [
           {String(prio)}
         </span>
       );
+    },
+  },
+  {
+    // button to approve ticket
+    header: "Approve",
+    accessorKey: "id",
+    cell: (row) => {
+      return <ApproveDialog props={row.getValue("id")} />;
     },
   },
 ];

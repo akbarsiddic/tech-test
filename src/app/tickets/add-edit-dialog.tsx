@@ -2,6 +2,7 @@
 
 import { Button } from "~/components/ui/button";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   Dialog,
   DialogContent,
@@ -37,6 +38,7 @@ import { Ticket } from "./columns";
 import { revalidatePath } from "next/cache";
 
 export function AddEdit() {
+    const router = useRouter();
   const [open, setOpen] = useState(false);
   const { toast } = useToast();
 
@@ -68,32 +70,35 @@ export function AddEdit() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
 
-    try {
-      // hit the api /api/tickets
-      const response = await fetch("/api/tickets", {
-        method: "POST",
-        body: JSON.stringify(values),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
-    
+   try {
+     // hit the api /api/tickets
+     const response = await fetch("/api/tickets", {
+       method: "POST",
+       body: JSON.stringify(values),
+       headers: {
+         "Content-Type": "application/json",
+       },
+     });
 
-      toast({
-        variant: "success",
-        title: "Ticket added",
-        description: "Ticket has been added successfully.",
-      });
-      setOpen(false);
-    } catch (error) {
-      toast({
-        variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: error.message || "An unexpected error occured.",
-      });
-      setOpen(false);
-    }
+     if (!response.ok) {
+       throw new Error("Error while adding ticket");
+     }
+
+     toast({
+       variant: "success",
+       title: "Ticket added",
+       description: "Ticket has been added successfully.",
+     });
+     setOpen(false);
+     router.refresh();
+   } catch (error) {
+     toast({
+       variant: "destructive",
+       title: "Uh oh! Something went wrong.",
+       description: error.message || "An unexpected error occured.",
+     });
+     setOpen(false);
+   }
   }
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -123,7 +128,7 @@ export function AddEdit() {
                     <FormItem>
                       <FormLabel>Name</FormLabel>
                       <FormControl>
-                        <Input placeholder="shadcn" {...field} />
+                        <Input placeholder="name" {...field} />
                       </FormControl>
                       <FormDescription>
                         This is title of ticket name.

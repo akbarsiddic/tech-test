@@ -7,7 +7,9 @@ import { unstable_noStore as noStore } from "next/cache";
 
 export default async function TicketsPage() {
     noStore();
-    const data = await db.query.tickets.findMany();
+    const data = await db.query.tickets.findMany({
+      orderBy: (tickets, { desc }) => [desc(tickets.id)],
+    });
   return (
     < >
     <div className="flex justify-between">
