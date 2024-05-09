@@ -2,6 +2,7 @@ import "~/styles/globals.css";
 
 import { Inter } from "next/font/google";
 import Sidebar from "~/components/sidebar";
+import { Toaster } from "~/components/ui/toaster";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -22,9 +23,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans ${inter.variable}`}>
-        <Sidebar>
-          {children}
-        </Sidebar>
+        <Sidebar>{children}</Sidebar>
+        <Toaster />
       </body>
     </html>
   );
