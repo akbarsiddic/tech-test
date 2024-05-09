@@ -34,6 +34,7 @@ import {
 } from "~/components/ui/select";
 import { db } from "~/server/db";
 import { Ticket } from "./columns";
+import { revalidatePath } from "next/cache";
 
 export function AddEdit() {
   const [open, setOpen] = useState(false);
@@ -77,7 +78,7 @@ export function AddEdit() {
         },
       });
       const data = await response.json();
-      console.log(data);
+    
 
       toast({
         variant: "success",
