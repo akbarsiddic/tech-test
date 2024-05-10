@@ -277,7 +277,7 @@ export default function Sidebar({ children }) {
               aria-hidden="true"
             />
 
-            <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
+            <div className="flex flex-1 justify-end gap-x-4 self-stretch lg:gap-x-6">
               <div className="flex items-center gap-x-4 lg:gap-x-6">
                 <button
                   type="button"
@@ -346,6 +346,7 @@ export default function Sidebar({ children }) {
                     </Menu.Items>
                   </Transition>
                 </Menu> */}
+
                 <UserButton />
               </div>
             </div>

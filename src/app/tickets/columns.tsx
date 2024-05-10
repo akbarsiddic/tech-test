@@ -3,6 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { ApproveDialog } from "./approve-dialog";
 
+
 export type Ticket = {
   id: number;
   name: string;
@@ -70,3 +71,5 @@ export const columns: ColumnDef<Ticket>[] = [
     },
   },
 ];
+
+

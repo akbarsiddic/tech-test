@@ -7,6 +7,9 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
+import { ApproveDialog } from "./approve-dialog";
+import { auth } from "@clerk/nextjs/server";
+
 import {
   Table,
   TableBody,
@@ -30,6 +33,7 @@ export function DataTable<TData, TValue>({
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
+
 
   return (
     <div className="rounded-md border">
